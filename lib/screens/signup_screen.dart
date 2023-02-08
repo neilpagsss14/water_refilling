@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:water_refill/screens/register_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatelessWidget {
+  SignupScreen({Key? key}) : super(key: key);
 
   late String first_name;
   late String last_name;
   late String phone_number;
   late String address;
   late String days;
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +40,12 @@ class LoginScreen extends StatelessWidget {
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.person),
-                      fillColor: Colors.white70,
+                      filled: true,
+                      fillColor: Colors.white,
                       label: const Text(
                         'First Name',
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black,
                         ),
                       ),
                       border: OutlineInputBorder(
@@ -57,12 +61,13 @@ class LoginScreen extends StatelessWidget {
                   },
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
+                      filled: true,
                       prefixIcon: const Icon(Icons.person),
-                      fillColor: Colors.white70,
+                      fillColor: Colors.white,
                       label: const Text(
                         'Last Name',
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black,
                         ),
                       ),
                       border: OutlineInputBorder(
@@ -80,11 +85,12 @@ class LoginScreen extends StatelessWidget {
                   maxLength: 11,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.phone),
-                      fillColor: Colors.white70,
+                      filled: true,
+                      fillColor: Colors.white,
                       label: const Text(
                         'Mobile Number',
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black,
                         ),
                       ),
                       border: OutlineInputBorder(
@@ -101,11 +107,12 @@ class LoginScreen extends StatelessWidget {
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.location_city),
-                      fillColor: Colors.white70,
+                      filled: true,
+                      fillColor: Colors.white,
                       label: const Text(
                         'Address',
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black,
                         ),
                       ),
                       border: OutlineInputBorder(
@@ -122,12 +129,13 @@ class LoginScreen extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
+                      filled: true,
                       prefixIcon: const Icon(Icons.calendar_today_outlined),
-                      fillColor: Colors.white70,
+                      fillColor: Colors.white,
                       label: const Text(
                         'Days Before Water Refill',
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black,
                         ),
                       ),
                       border: OutlineInputBorder(
@@ -143,7 +151,15 @@ class LoginScreen extends StatelessWidget {
                     color: Colors.white,
                     minWidth: 150,
                     height: 55,
-                    onPressed: () {},
+                    onPressed: () {
+                      box.write('firstName', first_name);
+                      box.write('lastName', last_name);
+                      box.write('mobileNum', phone_number);
+                      box.write('myAddress', address);
+                      box.write('daysBefore', days);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const RegisterScreen()));
+                    },
                     child: TextRegular(
                         text: 'Done', fontSize: 25, color: Colors.black)),
               ),

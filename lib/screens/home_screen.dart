@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:water_refill/screens/login_screen.dart';
+import 'package:water_refill/screens/signup_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                     height: 55,
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LoginScreen()));
+                          builder: (context) => SignupScreen()));
                     },
                     child: TextRegular(
                         text: 'Sign-up', fontSize: 25, color: Colors.black)),
