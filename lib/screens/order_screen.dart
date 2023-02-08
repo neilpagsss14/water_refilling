@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:water_refill/screens/list_screen.dart';
 import 'package:water_refill/screens/station_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
@@ -14,8 +15,8 @@ class OrderScreen extends StatelessWidget {
         backgroundColor: const Color(0xffA0D6F4),
         leading: IconButton(
           onPressed: (() {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const StationScreen()));
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => StationScreen()));
           }),
           icon: const Icon(Icons.arrow_back),
         ),
@@ -27,26 +28,28 @@ class OrderScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 45, right: 40),
-                child: TextRegular(
-                    text: 'Gundam Refilling',
-                    fontSize: 45,
-                    color: Colors.white),
+                padding: const EdgeInsets.only(top: 75, left: 28),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: box.read('stationName'),
+                        fontSize: 55,
+                        color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 200),
-                child: TextRegular(
-                    text: 'Station', fontSize: 45, color: Colors.white),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25, right: 265),
-                child: Text(box.read('myAddress'),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.5,
-                    )),
+                padding: const EdgeInsets.only(top: 25, left: 28),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: ('Address: ') + box.read('stationAddress'),
+                        fontSize: 18,
+                        color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20, left: 28, right: 28),
@@ -79,11 +82,14 @@ class OrderScreen extends StatelessWidget {
                     minWidth: 150,
                     height: 55,
                     onPressed: () {
+                      box.write('numGallons', gallons);
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const StationScreen()));
+                          builder: (context) => ListScreen()));
                     },
                     child: TextRegular(
-                        text: 'Done', fontSize: 25, color: Colors.black)),
+                        text: 'Place Order',
+                        fontSize: 25,
+                        color: Colors.black)),
               ),
             ],
           ),

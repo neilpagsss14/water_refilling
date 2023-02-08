@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:water_refill/screens/order_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
-class StationScreen extends StatelessWidget {
-  StationScreen({Key? key}) : super(key: key);
+class ListScreen extends StatelessWidget {
+  ListScreen({Key? key}) : super(key: key);
 
   final box = GetStorage();
 
@@ -48,7 +47,7 @@ class StationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: "Refilling Stations",
+                        text: "List of Orders",
                         fontSize: 25,
                         color: Colors.white),
                   ],
@@ -61,6 +60,7 @@ class StationScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 10),
@@ -69,19 +69,27 @@ class StationScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15)),
                   minWidth: 370,
                   height: 140,
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => OrderScreen()));
-                  },
+                  onPressed: () {},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextRegular(
-                          text: ('Station: ') + box.read('stationName'),
-                          fontSize: 30,
+                          text: box.read('firstName') +
+                              (' ') +
+                              box.read('lastName'),
+                          fontSize: 35,
                           color: Colors.black),
                       TextRegular(
-                          text: ('Address: ') + box.read('stationAddress'),
+                          text: ('Mobile: ') + box.read('mobileNum'),
+                          fontSize: 15,
+                          color: Colors.black),
+                      TextRegular(
+                          text: ('Address: ') + box.read('myAddress'),
+                          fontSize: 15,
+                          color: Colors.black),
+                      TextRegular(
+                          text:
+                              ('Number of Gallons: ') + box.read('numGallons'),
                           fontSize: 15,
                           color: Colors.black),
                     ],

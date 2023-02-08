@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:water_refill/screens/station_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
@@ -11,7 +12,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   late String station_name;
-  late String station_add;
+  late String station_address;
+
+  final box = GetStorage();
 
   TimeOfDay _timeOfDay = const TimeOfDay(hour: 00, minute: 00);
   TimeOfDay _timeOfDay2 = const TimeOfDay(hour: 00, minute: 00);
@@ -48,14 +51,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 190, top: 100),
-                child: TextRegular(
-                    text: "Water", fontSize: 75, color: Colors.white),
+                padding: const EdgeInsets.only(top: 100, left: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: "Water", fontSize: 75, color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 90),
-                child: TextRegular(
-                    text: "Refilling App", fontSize: 55, color: Colors.white),
+                padding: const EdgeInsets.only(left: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: "refilling app",
+                        fontSize: 75,
+                        color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20, left: 28, right: 28),
@@ -80,46 +95,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               Padding(
+                padding: const EdgeInsets.only(top: 10, left: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: 'Business Hours',
+                        fontSize: 18,
+                        color: Colors.white),
+                  ],
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(left: 28, right: 28),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50),
-                            child: TextRegular(
-                                text: 'Business Hours',
-                                fontSize: 17,
-                                color: Colors.white),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: MaterialButton(
-                              onPressed: _showTimePicker,
-                              child: Text(
-                                _timeOfDay.format(context).toString(),
-                                style: const TextStyle(fontSize: 24),
-                              ),
-                              minWidth: 150,
-                              height: 50,
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: MaterialButton(
+                            onPressed: _showTimePicker,
+                            child: Text(
+                              _timeOfDay.format(context).toString(),
+                              style: const TextStyle(fontSize: 24),
                             ),
+                            minWidth: 150,
+                            height: 50,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 5),
                       child: TextBold(
                           text: 'TO', fontSize: 20, color: Colors.white),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 25),
+                      padding: const EdgeInsets.only(top: 5),
                       child: Column(
                         children: [
                           MaterialButton(
@@ -144,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 padding: const EdgeInsets.only(top: 20, left: 28, right: 28),
                 child: TextFormField(
                   onChanged: (String input) {
-                    station_add = input;
+                    station_address = input;
                   },
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
@@ -171,8 +188,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     minWidth: 150,
                     height: 55,
                     onPressed: () {
+                      box.write('stationName', station_name);
+                      box.write('stationAddress', station_address);
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const StationScreen()));
+                          builder: (context) => StationScreen()));
                     },
                     child: TextRegular(
                         text: 'Done', fontSize: 25, color: Colors.black)),

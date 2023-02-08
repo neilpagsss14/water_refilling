@@ -14,17 +14,29 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 150, top: 250),
-                child: TextRegular(
-                    text: "Water", fontSize: 75, color: Colors.white),
+                padding: const EdgeInsets.only(top: 220, left: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: "Water", fontSize: 75, color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 60),
-                child: TextRegular(
-                    text: "Refilling App", fontSize: 55, color: Colors.white),
+                padding: const EdgeInsets.only(left: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: "refilling app",
+                        fontSize: 75,
+                        color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 300),
+                padding: const EdgeInsets.only(top: 250),
                 child: MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),

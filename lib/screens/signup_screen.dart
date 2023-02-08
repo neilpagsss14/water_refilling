@@ -22,14 +22,26 @@ class SignupScreen extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 80, right: 190),
-                child: TextRegular(
-                    text: 'Water', fontSize: 75, color: Colors.white),
+                padding: const EdgeInsets.only(top: 75, left: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: "Water", fontSize: 75, color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 140),
-                child: TextRegular(
-                    text: 'Refilling App', fontSize: 45, color: Colors.white),
+                padding: const EdgeInsets.only(left: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextRegular(
+                        text: "refilling app",
+                        fontSize: 75,
+                        color: Colors.white),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20, left: 28, right: 28),
